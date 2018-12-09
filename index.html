@@ -44,7 +44,12 @@
 		    	<a class="nav-link" ng-click="selectpage('contact')">CONTACT</a>
 		    </li>
 		    <li class="nav-item">
-		    	<a class="nav-link" ng-click="selectpage('cart')">CART</a>
+		    	<a class="nav-link" ng-click="selectpage('cart')">
+		    		CART
+		    		<span style="background-color: red;border-radius: 10px;padding:0 2px 0 1px; color: white">
+		    			{{cart.length}}
+		    		</span>
+		    	</a>
 		    </li>
 		</ul>
 	</nav>
@@ -63,8 +68,13 @@
 					<li ng-repeat="x in sandwich" style="background-color: lavender;margin-bottom: 10px;">
 			  			<p>
 			  				<span>{{x.category}}</span>
-			  				<span style="margin-left: 30vw;">price: Rs. {{x.price}}</span>
-			  				<button style="float: right;">Add</button>
+			  				<span style="margin-left: 20vw;">price: Rs. {{x.price}}</span>
+			  				<span style="margin-left: 20vw;">
+			  					<button ng-click="dec_quan(x)">-</button>
+			  						{{x.quantity}}
+			  					<button ng-click="inc_quan(x)">+</button>
+			  				</span>
+			  				<button ng-click="addtocart(x)" style="float: right;">Add</button>
 			  			</p>
 			  		</li>
 				</ul>
@@ -76,7 +86,12 @@
 					<li ng-repeat="x in burger" style="background-color: lavender;margin-bottom: 10px;">
 			  			<p>
 			  				<span>{{x.category}}</span>
-			  				<span style="margin-left: 30vw;">price: Rs. {{x.price}}</span>
+			  				<span style="margin-left: 20vw;">price: Rs. {{x.price}}</span>
+			  				<span style="margin-left: 20vw;">
+			  					<button ng-click="dec_quan(x)">-</button>
+			  						{{x.quantity}}
+			  					<button ng-click="inc_quan(x)">+</button>
+			  				</span>
 			  				<button style="float: right;">Add</button>
 			  			</p>
 			  		</li>
@@ -89,7 +104,12 @@
 					<li ng-repeat="x in coffee" style="background-color: lavender;margin-bottom: 10px;">
 						<p>
 				  			<span>{{x.category}}</span>
-				  			<span style="margin-left: 30vw;">price: Rs. {{x.price}}</span>
+				  			<span style="margin-left: 20vw;">price: Rs. {{x.price}}</span>
+				  			<span style="margin-left: 20vw;">
+			  					<button ng-click="dec_quan(x)">-</button>
+			  						{{x.quantity}}
+			  					<button ng-click="inc_quan(x)">+</button>
+			  				</span>
 				  			<button style="float: right;">Add</button>
 			  			</p>
 			  		</li>
@@ -111,8 +131,13 @@
 				<li ng-repeat="x in cart" style="background-color: lavender;margin-bottom: 10px;">
 					<p>
 			  			<span>{{x.category}}</span>
-			  			<span style="margin-left: 30vw;">price: Rs. {{x.price}}</span>
-			  			<button style="float: right;">Add</button>
+			  			<span style="margin-left: 20vw;">
+			  					<button ng-click="dec_quan(x)">-</button>
+			  						{{x.quantity}}
+			  					<button ng-click="inc_quan(x)">+</button>
+			  				</span>
+			  			<span style="margin-left: 10vw;">Rs. {{x.price}}</span>
+			  			<span style="float: right;">Rs. {{x.price*x.quantity}}</span>
 			 		</p>
 			  	</li>
 			</ul>
