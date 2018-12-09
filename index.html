@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CAFE HOGWARTS</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!--ANGULARJS SCRIPT-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<!--ANGULARJS ANIMATIONS-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+	<!--ANGULAR JS ROUTE MODULE-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+	<!------------->
+
+	<!--BOOTSTRAP-->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<!-- Popper JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<!------------->
+
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+	
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<a class="navbar-brand" href="#">
+			<img src="images/6-67750_coffee-logo-transparent-background.png" alt="logo" style="width:40px;">
+		</a>
+		 
+		<ul class="nav navbar-nav">
+			<li class="nav-item">
+		    	<a class="nav-link" ng-click="selectpage('about')">ABOUT</a>
+		    </li>
+		    <li class="nav-item">
+		    	<a class="nav-link" ng-click="selectpage('order')">ORDER</a>
+		    </li>
+		    <li class="nav-item">
+		    	<a class="nav-link" ng-click="selectpage('contact')">CONTACT</a>
+		    </li>
+		    <li class="nav-item">
+		    	<a class="nav-link" ng-click="selectpage('cart')">CART</a>
+		    </li>
+		</ul>
+	</nav>
+
+	<div class="container">
+		<div ng-show="current_page=='about'">
+			<h1>ABOUT</h1>
+		</div>
+
+		<div ng-show="current_page=='order'">
+			<h1>ORDER</h1>
+
+			<div>
+				<h1>SANDWICHES</h1>
+				<ul>
+					<li ng-repeat="x in sandwich" style="background-color: lavender;margin-bottom: 10px;">
+			  			<p>
+			  				<span>{{x.category}}</span>
+			  				<span style="margin-left: 30vw;">price: Rs. {{x.price}}</span>
+			  				<button style="float: right;">Add</button>
+			  			</p>
+			  		</li>
+				</ul>
+			</div>
+
+			<div>
+				<h1>BURGERS</h1>
+				<ul>
+					<li ng-repeat="x in burger" style="background-color: lavender;margin-bottom: 10px;">
+			  			<p>
+			  				<span>{{x.category}}</span>
+			  				<span style="margin-left: 30vw;">price: Rs. {{x.price}}</span>
+			  				<button style="float: right;">Add</button>
+			  			</p>
+			  		</li>
+				</ul>
+			</div>
+
+			<div>
+				<h1>COFFEE</h1>
+				<ul>
+					<li ng-repeat="x in coffee" style="background-color: lavender;margin-bottom: 10px;">
+						<p>
+				  			<span>{{x.category}}</span>
+				  			<span style="margin-left: 30vw;">price: Rs. {{x.price}}</span>
+				  			<button style="float: right;">Add</button>
+			  			</p>
+			  		</li>
+				</ul>
+			</div>
+
+
+
+		</div>
+
+		<div ng-show="current_page=='contact'">
+			<h1>CONTACT</h1>
+		</div>
+
+		<div ng-show="current_page=='cart'">
+			<h1>CART</h1>
+
+			<ul>
+				<li ng-repeat="x in coffee" style="background-color: lavender;margin-bottom: 10px;">
+					<p>
+			  			<span>{{x.category}}</span>
+			  			<span style="margin-left: 30vw;">price: Rs. {{x.price}}</span>
+			  			<button style="float: right;">Add</button>
+			 		</p>
+			  	</li>
+			</ul>
+
+		</div>
+	</div>
+
+
+
+<script>
+var app = angular.module('myApp', ['ngRoute']);
+
+	app.controller('myCtrl', function($scope){
+		
+		$scope.current_page = 'order';
+		$scope.selectpage = function(page){
+			$scope.current_page = page;
+		}
+
+		$scope.sandwich = [
+			{category:'cheese', price:50 },
+			{category:'paneer', price:65 },
+			{category:'veg', price:40 },
+			{category:'schezwan', price:50 },
+			{category:'coleslaw', price:35 },
+			{category:'masala', price:35 }
+		]
+
+		$scope.burger = [
+			{category:'veg', price:45 },
+			{category:'cheese', price:60 },
+			{category:'paneer', price:50 }
+		]
+
+		$scope.coffee = [
+			{category:'cold', price:50 },
+			{category:'chocolate', price:60 }
+		]
+
+
+
+	});	
+</script>
+
+
+</body>	
+</html>
