@@ -4,7 +4,44 @@
 	<title>CAFE HOGWARTS</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+	<!--CHATBOT-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+        var accessToken = "de2f088afa624e669cd84196c7db1867";
+        var baseUrl = "https://api.api.ai/v1/";
+        $(document).ready(function () {
+            $("#input").keypress(function (event) {
+                if (event.which == 13) {
+                    $('.chatBox').append('<span class="userInput">' + 'me:' + $('input').val() + '</span><br><br>')
+                    event.preventDefault();
+                    let query = $('input').val()
+                    $('input').val('')
+                    send(query);
+                }
+            });
+        });
+
+        function send(query) {
+            var text = query;
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "query?v=20180101",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {
+                    "Authorization": "Bearer " + accessToken
+                },
+                data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+                success: function (data) {
+                    setResponse(data);
+                }
+            });
+        }
+        function setResponse(val) {
+            $(".chatBox").append('<span class="responseData">' + 'bot:' + val.result.fulfillment.speech + '</span><br><br>');
+        }
+    </script>
+	<!---------->
 	<!--ANGULARJS SCRIPT-->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	<!--ANGULARJS ANIMATIONS-->
@@ -23,6 +60,46 @@
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	<!------------->
+
+	<style>
+		#bot {
+            width: 500px;
+            margin: 0 auto;
+            height: 500px;
+            border: 2px solid black;
+            padding: 10px;
+            position: fixed;
+            z-index: 3;
+            top: 100px;
+            right: 400px;
+            background-color: lavender;
+
+        }
+
+        .chatBox {
+            width: 400px;
+            height: 400px;
+            overflow: auto
+        }
+
+        .userInput {
+            float: left;
+        }
+
+        .responseData {
+            float: right
+        }
+
+        ;
+
+        #input {
+            width: 500px;
+        }
+
+        button {
+            width: 50px;
+        }		
+	</style>
 
 </head>
 
@@ -145,7 +222,14 @@
 		</div>
 	</div>
 
+	<div style="background-color: lightblue; height: 50px;width: 100px;position: fixed;bottom: 50px; right: 50px;text-align: center;cursor: pointer;" ng-click="togglebot()">
+		<h1>BOT</h1>
+	</div>
 
+	<div ng-show="showbot" id="bot">
+		<div class='chatBox'></div>
+    	<input id="input" type="text" style="width: 430px;"> <button id="rec">send</button>
+    </div>	
 
 <script src="index.js"></script>
 

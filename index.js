@@ -2,7 +2,7 @@ var app = angular.module('myApp', ['ngRoute']);
 
 	app.controller('myCtrl', function($scope, $window){
 		
-		$scope.current_page = 'order';
+		$scope.current_page = 'about';
 		$scope.selectpage = function(page){
 			$scope.current_page = page;
 		}
@@ -43,6 +43,13 @@ var app = angular.module('myApp', ['ngRoute']);
 			$scope.cart.push(x);
 			$window.alert("Item Added");
 		}
+
+		$scope.showbot = false;
+
+		$scope.togglebot = function(){
+			$scope.showbot = !$scope.showbot;
+		}
+
 
 
 	});	
